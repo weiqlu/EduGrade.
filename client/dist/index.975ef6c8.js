@@ -27215,7 +27215,7 @@ function App() {
     }, void 0, false, {
         fileName: "src/App.js",
         lineNumber: 2,
-        columnNumber: 10
+        columnNumber: 12
     }, this);
 }
 _c = App;
