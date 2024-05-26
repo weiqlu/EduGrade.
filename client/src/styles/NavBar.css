@@ -1,0 +1,22 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.nav {
+  background-color: gray;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.site-logo {
+  font-size: 2rem;
+}
+
+.nav a {
+  text-decoration: none;
+}

@@ -1,7 +1,13 @@
+import NavBar from "./components/NavBar";
+import SearchBar from "./components/SearchBar";
+
 function App() {
-    return <p> Hello! </p>;
-  }
-  
-  export default App;
-  
-  
+  return (
+    <div className="wrapper">
+      <NavBar />
+      <SearchBar />
+    </div>
+  );
+}
+
+export default App;
