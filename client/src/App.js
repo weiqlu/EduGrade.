@@ -1,11 +1,13 @@
 import NavBar from "./components/NavBar";
-import SearchBar from "./components/SearchBar";
+import ClassList from "./components/ClassList";
 
 function App() {
   return (
-    <div className="wrapper">
+    <div className="nav-bar">
       <NavBar />
-      <SearchBar />
+      <div className="class-list">
+        <ClassList />
+      </div>
     </div>
   );
 }
