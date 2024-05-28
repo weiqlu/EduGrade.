@@ -30,14 +30,14 @@ body {
 
 .input-container {
   position: relative;
-  width: 75%;
+  width: 60%;
 }
 
 input[type="text"] {
   width: 100%;
   padding: 13px 40px 13px 13px;
   border: 1px solid #ccc;
-  border-radius: 20px;
+  border-radius: 18px;
   font-size: 16px;
   outline: 0;
   background-color: #f3f2f2;
