@@ -2,9 +2,7 @@ import React from "react";
 import "../styles/ClassList.css";
 import DataTable from "react-data-table-component";
 
-function ClassList(props) {
-  const [items, setItems] = React.useState([]);
-
+function ClassList({ search }) {
   // table headers
   const columns = [
     {
@@ -88,6 +86,11 @@ function ClassList(props) {
     },
   ];
 
+  //filters the table for the search query, showing only what is given
+  const filteredData = data.filter((item) =>
+    Object.values(item).join(" ").toLowerCase().includes(search.toLowerCase())
+  );
+
   /* Still need to style the table to fit appropriately on the page */
   return (
     <div>
@@ -95,7 +98,7 @@ function ClassList(props) {
       <DataTable
         title="Grade Distribution"
         columns={columns}
-        data={data}
+        data={filteredData}
         pagination
       />
     </div>

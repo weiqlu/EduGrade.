@@ -2,13 +2,19 @@ import React from "react";
 import "../styles/NavBar.css";
 import { FaSearch } from "react-icons/fa";
 
-function NavBar() {
+function NavBar({ setSearch }) {
   const [input, setInput] = React.useState("");
 
-  // resets the search bar to empty after submitting
+  // resets the search bar to empty after the user submits
   function handleSubmit(event) {
     event.preventDefault();
     setInput("");
+  }
+
+  function handleChange(event) {
+    const value = event.target.value;
+    setInput(value);
+    setSearch(value);
   }
 
   return (
@@ -23,7 +29,7 @@ function NavBar() {
             type="text"
             value={input}
             placeholder="Search..."
-            onChange={(event) => setInput(event.target.value)}
+            onChange={handleChange}
           />
           <button type="submit" onClick={handleSubmit}>
             <FaSearch />

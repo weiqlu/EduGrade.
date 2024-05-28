@@ -1,14 +1,16 @@
 import NavBar from "./components/NavBar";
 import ClassList from "./components/ClassList";
+import React from 'react'; 
 
 function App() {
-  /* need to bring both the input state and data state to 
-  this parent directory in order to be able to filter it later*/
+  // state for the search query to filter, passed down to NavBar and ClassList component
+  const [search, setSearch] = React.useState("");
+
   return (
     <div className="nav-bar">
-      <NavBar />
+      <NavBar setSearch={setSearch}/>
       <div className="class-list">
-        <ClassList />
+        <ClassList search={search}/>
       </div>
     </div>
   );
