@@ -7,6 +7,7 @@ import { FilterMatchMode } from "primereact/api";
 import { InputText } from "primereact/inputtext";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
+import { FloatLabel } from "primereact/floatlabel";
 
 function ClassList({ search }) {
   const [classes, setClasses] = React.useState([]);
@@ -38,31 +39,37 @@ function ClassList({ search }) {
   return (
     <div className="grade-distribution">
       <div className="header">
-        <p> Course History</p>
+        <h2>Course History</h2>
         <div className="input-text">
-          <InputText
-            onChange={(event) =>
-              setFilter({
-                global: {
-                  value: event.target.value,
-                  matchMode: FilterMatchMode.CONTAINS,
-                },
-              })
-            }
-            placeholder="Keyword Search..."
-          />
+          <FloatLabel>
+            <InputText
+              id="input"
+              onChange={(event) =>
+                setFilter({
+                  global: {
+                    value: event.target.value,
+                    matchMode: FilterMatchMode.CONTAINS,
+                  },
+                })
+              }
+            />
+            <label htmlFor="input" className="keyword-search-label">
+              Keyword Search
+            </label>
+          </FloatLabel>
         </div>
       </div>
 
       <DataTable
         value={filteredClasses}
         paginator
-        rows={80}
-        rowsPerPageOptions={[25, 50, 100]}
+        rows={25}
+        rowsPerPageOptions={[25, 50, 75]}
         removableSort
         filters={filter}
         scrollable
         scrollHeight="1000px"
+        tableStyle={{ minWidth: "62rem" }}
       >
         <Column field="year" header="Year" sortable></Column>
         <Column field="term" header="Term" sortable></Column>
