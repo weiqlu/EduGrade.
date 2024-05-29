@@ -1,702 +1,80 @@
 import React from "react";
 import "../styles/ClassList.css";
-import DataTable from "react-data-table-component";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { SectionData } from "../data/Sections.js";
+import { FilterMatchMode } from "primereact/api";
+import { InputText } from "primereact/inputtext";
+import "primereact/resources/themes/lara-light-indigo/theme.css";
+import "primereact/resources/primereact.min.css";
 
 function ClassList({ search }) {
-  // table headers
-  const columns = [
-    {
-      name: "Academic Year",
-      selector: (row) => row.year,
-      sortable: true,
-    },
-    {
-      name: "Term",
-      selector: (row) => row.term,
-      sortable: true,
-    },
-    {
-      name: "Subject",
-      selector: (row) => row.subject,
-      sortable: true,
-    },
-    {
-      name: "Course No.",
-      selector: (row) => row.number,
-      sortable: true,
-    },
-    {
-      name: "Course Title",
-      selector: (row) => row.title,
-      sortable: true,
-    },
-    {
-      name: "Instructor",
-      selector: (row) => row.instructor,
-      sortable: true,
-    },
-    {
-      name: "GPA",
-      selector: (row) => row.gpa,
-      sortable: true,
-    },
-    {
-      name: "CRN",
-      selector: (row) => row.crn,
-      sortable: true,
-    },
-    {
-      name: "Enrollments",
-      selector: (row) => row.enrollments,
-      sortable: true,
-    },
-    {
-      name: "Credits",
-      selector: (row) => row.credits,
-      sortable: true,
-    },
-  ];
+  const [classes, setClasses] = React.useState([]);
+  const [filter, setFilter] = React.useState({
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+  });
 
-  const customStyles = {
-    rows: {
-      style: {
-        minHeight: "50px", // override the row height
-      },  
-    },
-  };
+  React.useEffect(() => {
+    const data = SectionData.getData();
+    setClasses(data);
+  }, []);
 
-  /* currently hardcoded data, need to
-   populate the DB and connect to it using axios request*/
-  const data = [
-    {
-      year: "2022-2023",
-      term: "Fall",
-      subject: "CS",
-      number: "3114",
-      title: "Data Structures and Algorithms",
-      instructor: "Fargally",
-      gpa: "3.82",
-      enrollments: "300",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "2114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "9114",
-      title: "Data Structures and Algorithms",
-      instructor: "Ekebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "9114",
-      title: "Data Structures and Algorithms",
-      instructor: "Elebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-    {
-      year: "2021-2022",
-      term: "Spring",
-      subject: "CS",
-      number: "9114",
-      title: "Data Structures and Algorithms",
-      instructor: "Emebo",
-      gpa: "3.12",
-      enrollments: "150",
-      crn: "84125",
-      credits: "3",
-    },
-  ];
+  const filteredClasses = classes.filter((classItem) => {
+    const lowerCaseSearch = search.toLowerCase();
+    return (
+      classItem.year.toString().includes(lowerCaseSearch) ||
+      classItem.term.toLowerCase().includes(lowerCaseSearch) ||
+      classItem.subject.toLowerCase().includes(lowerCaseSearch) ||
+      classItem.number.toLowerCase().includes(lowerCaseSearch) ||
+      classItem.title.toLowerCase().includes(lowerCaseSearch) ||
+      classItem.instructor.toLowerCase().includes(lowerCaseSearch) ||
+      classItem.gpa.toString().includes(lowerCaseSearch) ||
+      classItem.enrollments.toString().includes(lowerCaseSearch) ||
+      classItem.crn.toLowerCase().includes(lowerCaseSearch) ||
+      classItem.credits.toString().includes(lowerCaseSearch)
+    );
+  });
 
-  //filters the table for the search query, showing only what is given
-  const filteredData = data.filter((item) =>
-    Object.values(item).join(" ").toLowerCase().includes(search.toLowerCase())
-  );
-
-  /* Still need to style the table to fit appropriately on the page */
   return (
-    <div className="data-table-wrapper">
+    <div className="grade-distribution">
+      <div className="header">
+        <p> Course History</p>
+        <div className="input-text">
+          <InputText
+            onChange={(event) =>
+              setFilter({
+                global: {
+                  value: event.target.value,
+                  matchMode: FilterMatchMode.CONTAINS,
+                },
+              })
+            }
+            placeholder="Keyword Search..."
+          />
+        </div>
+      </div>
+
       <DataTable
-        title="Grade Distribution"
-        columns={columns}
-        data={filteredData}
-        customStyles={customStyles}
-        pagination
-      />
+        value={filteredClasses}
+        paginator
+        rows={80}
+        rowsPerPageOptions={[25, 50, 100]}
+        removableSort
+        filters={filter}
+        scrollable
+        scrollHeight="1000px"
+      >
+        <Column field="year" header="Year" sortable></Column>
+        <Column field="term" header="Term" sortable></Column>
+        <Column field="subject" header="Subject" sortable></Column>
+        <Column field="number" header="Number" sortable></Column>
+        <Column field="title" header="Title" sortable></Column>
+        <Column field="instructor" header="Instructor" sortable></Column>
+        <Column field="gpa" header="GPA" sortable></Column>
+        <Column field="enrollments" header="Enrollments" sortable></Column>
+        <Column field="crn" header="CRN" sortable></Column>
+        <Column field="credits" header="Credits" sortable></Column>
+      </DataTable>
     </div>
   );
 }
