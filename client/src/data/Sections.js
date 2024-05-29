@@ -122,8 +122,8 @@ export const SectionData = {
         credits: "3",
       },
       {
-        year: "2023-2024",
-        term: "Summer",
+        year: "2023-2022",
+        term: "Spring",
         subject: "CS",
         number: "4604",
         title: "Database Management Systems",
