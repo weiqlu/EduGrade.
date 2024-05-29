@@ -1,16 +1,14 @@
 import React from "react";
 import NavBar from "./components/NavBar";
 import ClassList from "./components/ClassList";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 function App() {
-  // state for the search query to filter, passed down to NavBar and ClassList component
-  const [search, setSearch] = React.useState("");
-
   return (
     <div className="nav-bar">
-      <NavBar setSearch={setSearch} />
+      <NavBar />
       <div className="class-list">
-        <ClassList search={search} />
+        <ClassList />
       </div>
     </div>
   );

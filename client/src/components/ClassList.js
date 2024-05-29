@@ -5,11 +5,11 @@ import { Column } from "primereact/column";
 import { SectionData } from "../data/Sections.js";
 import { FilterMatchMode } from "primereact/api";
 import { InputText } from "primereact/inputtext";
+import { FloatLabel } from "primereact/floatlabel";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
-import { FloatLabel } from "primereact/floatlabel";
 
-function ClassList({ search }) {
+function ClassList() {
   const [classes, setClasses] = React.useState([]);
   const [filter, setFilter] = React.useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
@@ -19,22 +19,6 @@ function ClassList({ search }) {
     const data = SectionData.getData();
     setClasses(data);
   }, []);
-
-  const filteredClasses = classes.filter((classItem) => {
-    const lowerCaseSearch = search.toLowerCase();
-    return (
-      classItem.year.toString().includes(lowerCaseSearch) ||
-      classItem.term.toLowerCase().includes(lowerCaseSearch) ||
-      classItem.subject.toLowerCase().includes(lowerCaseSearch) ||
-      classItem.number.toLowerCase().includes(lowerCaseSearch) ||
-      classItem.title.toLowerCase().includes(lowerCaseSearch) ||
-      classItem.instructor.toLowerCase().includes(lowerCaseSearch) ||
-      classItem.gpa.toString().includes(lowerCaseSearch) ||
-      classItem.enrollments.toString().includes(lowerCaseSearch) ||
-      classItem.crn.toLowerCase().includes(lowerCaseSearch) ||
-      classItem.credits.toString().includes(lowerCaseSearch)
-    );
-  });
 
   return (
     <div className="grade-distribution">
@@ -61,7 +45,8 @@ function ClassList({ search }) {
       </div>
 
       <DataTable
-        value={filteredClasses}
+        value={classes}
+        dataKey="id"
         paginator
         rows={25}
         rowsPerPageOptions={[25, 50, 75]}
