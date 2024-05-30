@@ -1,9 +1,11 @@
+/* Review.css */
 .review-page {
-  position: fixed;
-  inset: 0px;
-  width: 13rem;
-  height: 5rem;
-  max-width: 100vw;
-  max-height: 100dvh;
-  margin: auto;
+  background-color: palevioletred;
+  padding: 20px;
+  height: 100vh;
+  display: grid;
+}
+
+.review-search {
+  background-color: blue;
 }
