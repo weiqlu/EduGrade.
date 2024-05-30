@@ -9,7 +9,6 @@ import { FloatLabel } from "primereact/floatlabel";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 
-
 function ClassList() {
   const [classes, setClasses] = React.useState([]);
   const [filter, setFilter] = React.useState({
@@ -17,7 +16,11 @@ function ClassList() {
   });
 
   React.useEffect(() => {
-    const data = SectionData.getData();
+    const data = SectionData.getData().map((item) => ({
+      ...item,
+      subjectNumber: `${item.subject} ${item.number} ${item.instructor} `,
+      subjectNumberWithInstructor: `${item.subject}${item.number}${item.instructor} `,
+    }));
     setClasses(data);
   }, []);
 
@@ -53,6 +56,12 @@ function ClassList() {
         rowsPerPageOptions={[25, 50, 75]}
         removableSort
         filters={filter}
+        globalFilterFields={[
+          "subjectNumber",
+          "subjectNumberWithInstructor",
+          "title",
+          "instructor",
+        ]}
         scrollable
         scrollHeight="1000px"
         tableStyle={{ minWidth: "62rem" }}
@@ -60,8 +69,8 @@ function ClassList() {
         <Column field="year" header="Year" sortable></Column>
         <Column field="term" header="Term" sortable></Column>
         <Column field="subject" header="Subject" sortable></Column>
-        <Column field="number" header="Number" sortable></Column>
-        <Column field="title" header="Title" sortable></Column>
+        <Column field="number" header="Course No." sortable></Column>
+        <Column field="title" header="Course Title" sortable></Column>
         <Column field="instructor" header="Instructor" sortable></Column>
         <Column field="gpa" header="GPA" sortable></Column>
         <Column field="enrollments" header="Enrollments" sortable></Column>

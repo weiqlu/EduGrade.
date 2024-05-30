@@ -55,8 +55,6 @@ function Review() {
           </FloatLabel>
           <Button label="Primary" raised onClick={handleSubmit} />
         </form>
-
-        
       </div>
     </div>
   );
