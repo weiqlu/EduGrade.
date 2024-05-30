@@ -15,13 +15,31 @@ function ClassList() {
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
 
+  // retrive and store the data into state
   React.useEffect(() => {
     const data = SectionData.getData().map((item) => ({
       ...item,
       subjectNumber: `${item.subject} ${item.number} ${item.instructor} `,
       subjectNumberWithInstructor: `${item.subject}${item.number}${item.instructor} `,
+      yearAndTerm: `${item.year}${item.term} `,
+      yearAndTerm2: `${item.year} ${item.term} `,
     }));
     setClasses(data);
+  }, []);
+
+  // scale the table to the window size
+  React.useEffect(() => {
+    const handleResize = () => {
+      const container = document.querySelector(".classlist-container");
+      const headerHeight =
+        document.querySelector(".classlist-header").offsetHeight;
+      container.style.height = `calc(100vh - ${headerHeight + 20}px)`;
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
@@ -53,7 +71,6 @@ function ClassList() {
         dataKey="id"
         paginator
         rows={50}
-        rowsPerPageOptions={[25, 50, 75]}
         removableSort
         filters={filter}
         globalFilterFields={[
@@ -61,9 +78,15 @@ function ClassList() {
           "subjectNumberWithInstructor",
           "title",
           "instructor",
+          "yearAndTerm",
+          "yearAndTerm2",
+          "gpa",
+          "enrollments",
+          "crn",
+          "credits",
         ]}
         scrollable
-        scrollHeight="1000px"
+        scrollHeight="flex"
         tableStyle={{ minWidth: "62rem" }}
       >
         <Column field="year" header="Year" sortable></Column>

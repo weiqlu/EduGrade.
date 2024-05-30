@@ -23,13 +23,14 @@ function Review() {
     }
   }, [crn]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     const foundSection = SectionData.getData().find((sec) => sec.crn === crn);
     setSection(foundSection || null);
   };
 
-  const handleReviewSubmit = (e) => {
-    e.preventDefault();
+  const handleReviewSubmit = (event) => {
+    event.preventDefault();
     if (section) {
       const newReviews = [...reviews, review];
       setReviews(newReviews);
