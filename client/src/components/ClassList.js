@@ -43,63 +43,65 @@ function ClassList() {
   }, []);
 
   return (
-    <div className="classlist-container">
-      <div className="classlist-header">
-        <h2>Grade Distribution</h2>
-        <div className="classlist-keyword">
-          <FloatLabel>
-            <InputText
-              id="input"
-              onChange={(event) =>
-                setFilter({
-                  global: {
-                    value: event.target.value,
-                    matchMode: FilterMatchMode.CONTAINS,
-                  },
-                })
-              }
-            />
-            <label htmlFor="input" className="keyword-search-label">
-              Keyword Search
-            </label>
-          </FloatLabel>
+    <div className="classlist-wrapper">
+      <div className="classlist-container">
+        <div className="classlist-header">
+          <h2>Grade Distribution</h2>
+          <div className="classlist-keyword">
+            <FloatLabel>
+              <InputText
+                id="input"
+                onChange={(event) =>
+                  setFilter({
+                    global: {
+                      value: event.target.value,
+                      matchMode: FilterMatchMode.CONTAINS,
+                    },
+                  })
+                }
+              />
+              <label htmlFor="input" className="keyword-search-label">
+                Keyword Search
+              </label>
+            </FloatLabel>
+          </div>
         </div>
-      </div>
 
-      <DataTable
-        value={classes}
-        dataKey="id"
-        paginator
-        rows={50}
-        removableSort
-        filters={filter}
-        globalFilterFields={[
-          "subjectNumber",
-          "subjectNumberWithInstructor",
-          "title",
-          "instructor",
-          "yearAndTerm",
-          "yearAndTerm2",
-          "gpa",
-          "enrollments",
-          "crn",
-          "credits",
-        ]}
-        scrollable
-        scrollHeight="flex"
-        tableStyle={{ minWidth: "62rem" }}
-      >
-        <Column field="year" header="Year" sortable></Column>
-        <Column field="term" header="Term" sortable></Column>
-        <Column field="subject" header="Subject" sortable></Column>
-        <Column field="number" header="Course No." sortable></Column>
-        <Column field="title" header="Course Title" sortable></Column>
-        <Column field="instructor" header="Instructor" sortable></Column>
-        <Column field="gpa" header="GPA" sortable></Column>
-        <Column field="enrollments" header="Enrollments" sortable></Column>
-        <Column field="crn" header="CRN" sortable></Column>
-        <Column field="credits" header="Credits" sortable></Column>
-      </DataTable>
+        <DataTable
+          value={classes}
+          dataKey="id"
+          paginator
+          rows={50}
+          removableSort
+          filters={filter}
+          globalFilterFields={[
+            "subjectNumber",
+            "subjectNumberWithInstructor",
+            "title",
+            "instructor",
+            "yearAndTerm",
+            "yearAndTerm2",
+            "gpa",
+            "enrollments",
+            "crn",
+            "credits",
+          ]}
+          scrollable
+          scrollHeight="flex"
+          tableStyle={{ minWidth: "62rem" }}
+        >
+          <Column field="year" header="Year" sortable></Column>
+          <Column field="term" header="Term" sortable></Column>
+          <Column field="subject" header="Subject" sortable></Column>
+          <Column field="number" header="Course No." sortable></Column>
+          <Column field="title" header="Course Title" sortable></Column>
+          <Column field="instructor" header="Instructor" sortable></Column>
+          <Column field="gpa" header="GPA" sortable></Column>
+          <Column field="enrollments" header="Enrollments" sortable></Column>
+          <Column field="crn" header="CRN" sortable></Column>
+          <Column field="credits" header="Credits" sortable></Column>
+        </DataTable>
+      </div>
     </div>
   );
 }

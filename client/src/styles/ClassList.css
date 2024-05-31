@@ -1,3 +1,15 @@
+.classlist-wrapper {
+  /*
+  This is to change the background in the future
+
+  background-image: url("https://www.countdowns.live/_next/image?url=%2Fbackgrounds%2Flofigirl.gif&w=1920&q=75");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  */
+  height: 100vh;
+}
+
 .classlist-container {
   margin-top: auto;
   margin-left: auto;
@@ -13,17 +25,27 @@
   align-items: center;
   font-weight: bold;
   margin-bottom: 5px;
-  border: 2px solid #ccc;
+  border: 2px solid rgba(204, 204, 204, 0.5);
   border-radius: 8px;
   padding: 10px;
   background-color: #f9f9f9;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
 }
 
+.classlist-header h2 {
+  margin-left: 2px;
+}
+
+.classlist-header input {
+  width: 285px;
+  margin-right: 2px;
+}
+
 .classlist-container .p-datatable {
-  border: 2px solid #ccc;
+  border: 2px solid rgba(204, 204, 204, 0.5);
   border-radius: 8px;
   padding: 1px;
+  background-color: #f9f9f9e8;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
 }
 
