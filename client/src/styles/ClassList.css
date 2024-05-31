@@ -36,9 +36,10 @@
   margin-left: 2px;
 }
 
-.classlist-header input {
-  width: 285px;
+.classlist-keyword input {
+  width: 290px;
   margin-right: 2px;
+  border-radius: 9px;
 }
 
 .classlist-container .p-datatable {

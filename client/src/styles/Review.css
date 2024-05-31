@@ -3,7 +3,8 @@
   background-color: palevioletred;
   padding: 20px;
   height: 100vh;
-  display: grid;
+  display: flex;
+  padding-top: 80px;
 }
 
 .review-search {
