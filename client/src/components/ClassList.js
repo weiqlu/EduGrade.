@@ -24,6 +24,7 @@ function ClassList() {
       yearAndTerm: `${item.year}${item.term} `,
       yearAndTerm2: `${item.year} ${item.term} `,
     }));
+    console.log(data); // Add this line to check the data structure
     setClasses(data);
   }, []);
 
