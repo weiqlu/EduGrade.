@@ -15,17 +15,22 @@ function ClassList() {
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
 
-  // retrive and store the data into state
   React.useEffect(() => {
-    const data = SectionData.getData().map((item) => ({
-      ...item,
-      subjectNumber: `${item.subject} ${item.number} ${item.instructor} `,
-      subjectNumberWithInstructor: `${item.subject}${item.number}${item.instructor} `,
-      yearAndTerm: `${item.year}${item.term} `,
-      yearAndTerm2: `${item.year} ${item.term} `,
-    }));
-    console.log(data); // Add this line to check the data structure
-    setClasses(data);
+    fetch("http://localhost:5000/sections")
+      .then((response) => response.json())
+      .then((data) => {
+        const formattedData = data.map((item) => ({
+          ...item,
+          subjectNumber: `${item.subjects} ${item.numbers} ${item.instructor}`,
+          subjectNumberWithInstructor: `${item.subjects}${item.numbers}${item.instructor}`,
+          yearAndTerm: `${item.years}${item.term}`,
+          yearAndTerm2: `${item.years} ${item.term}`,
+        }));
+        setClasses(formattedData);
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
   }, []);
 
   // scale the table to the window size
