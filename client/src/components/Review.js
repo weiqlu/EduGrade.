@@ -51,8 +51,9 @@ function Review() {
         },
         body: JSON.stringify(newReview),
       })
-        .then(() => {
-          setReviews([...reviews, newReview]);
+        .then((response) => response.json())
+        .then((data) => {
+          setReviews([...reviews, data]);
           setReview("");
         })
         .catch((error) => {

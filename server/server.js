@@ -42,7 +42,9 @@ app.post("/reviews", (req, res) => {
       res.status(500).send("Error inserting review");
       return;
     }
-    res.status(201).send("Review inserted successfully");
+    const insertedId = results.insertId;
+    const newReview = { id: insertedId, crn, review };
+    res.status(201).json(newReview);
   });
 });
 
