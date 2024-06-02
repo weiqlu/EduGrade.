@@ -3,6 +3,7 @@ const mysql = require("mysql2");
 const cors = require("cors");
 
 const app = express();
+/* { origin: ["http://localhost:5000", "https://EduGrade.onrender.com"] } */
 app.use(cors());
 app.use(express.json());
 
