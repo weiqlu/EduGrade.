@@ -3,7 +3,6 @@ const mysql = require("mysql2");
 const cors = require("cors");
 
 const app = express();
-/* { origin: ["http://localhost:5000", "https://EduGrade.onrender.com"] } */
 app.use(cors());
 app.use(express.json());
 
@@ -89,4 +88,5 @@ app.put("/reviews/:id", (req, res) => {
   });
 });
 
-app.listen(5000, () => console.log("Server running on port 5000"));
+const port = 5000;
+app.listen(port, () => console.log(`Listening on port ${port}`));
