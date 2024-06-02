@@ -15,61 +15,87 @@ function Review() {
 
   React.useEffect(() => {
     if (crn) {
-      const storedReviews = localStorage.getItem(crn);
-      if (storedReviews) {
-        setReviews(JSON.parse(storedReviews));
-      } else {
-        setReviews([]);
-      }
+      fetch(`http://localhost:5000/reviews/${crn}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setReviews(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching reviews:", error);
+        });
     }
   }, [crn]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const foundSection = SectionData.getData().find((sec) => sec.crn === crn);
-    setSection(foundSection || null);
-    setCrn("");
+    fetch("http://localhost:5000/sections")
+      .then((response) => response.json())
+      .then((data) => {
+        const foundSection = data.find((sec) => sec.crn === parseInt(crn));
+        setSection(foundSection || null);
+        setCrn("");
+      })
+      .catch((error) => {
+        console.error("Error fetching section:", error);
+      });
   };
 
   const handleReviewSubmit = (event) => {
     event.preventDefault();
     if (section) {
-      const newReviews = [...reviews, review];
-      setReviews(newReviews);
-      localStorage.setItem(crn, JSON.stringify(newReviews));
-      setReview("");
+      const newReview = { crn: section.crn, review };
+      fetch("http://localhost:5000/reviews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newReview),
+      })
+        .then(() => {
+          setReviews([...reviews, newReview]);
+          setReview("");
+        })
+        .catch((error) => {
+          console.error("Error submitting review:", error);
+        });
     }
   };
 
-  const handleReviewDelete = (index) => {
-    const newReviews = reviews.filter((_, i) => i !== index);
-    setReviews(newReviews);
-    localStorage.setItem(crn, JSON.stringify(newReviews));
+  const handleReviewDelete = (id) => {
+    fetch(`http://localhost:5000/reviews/${id}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        const newReviews = reviews.filter((review) => review.id !== id);
+        setReviews(newReviews);
+      })
+      .catch((error) => {
+        console.error("Error deleting review:", error);
+      });
   };
 
-  const handleReviewEdit = (index) => {
-    const newReview = prompt("Edit your review:", reviews[index]);
+  const handleReviewEdit = (id, index) => {
+    const newReview = prompt("Edit your review:", reviews[index].review);
     if (newReview !== null) {
-      const newReviews = reviews.map((rev, i) =>
-        i === index ? newReview : rev
-      );
-      setReviews(newReviews);
-      localStorage.setItem(crn, JSON.stringify(newReviews));
+      fetch(`http://localhost:5000/reviews/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ review: newReview }),
+      })
+        .then(() => {
+          const updatedReview = { ...reviews[index], review: newReview };
+          const newReviews = reviews.map((rev, i) =>
+            i === index ? updatedReview : rev
+          );
+          setReviews(newReviews);
+        })
+        .catch((error) => {
+          console.error("Error updating review:", error);
+        });
     }
   };
-
-  // scale the page to the window size
-  React.useEffect(() => {
-    const handleResize = () => {
-      const container = document.querySelector(".review-page");
-      container.style.height = `calc(100vh - 80px)`;
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   return (
     <div className="review-page">
@@ -84,6 +110,7 @@ function Review() {
                 onChange={(event) => {
                   setCrn(event.target.value);
                 }}
+                aria-label="Section CRN"
               />
               <label htmlFor="crn">Section CRN</label>
             </FloatLabel>
@@ -95,11 +122,11 @@ function Review() {
             <div className="section-details-wrapper">
               <div className="section-details">
                 <h3>Section Details</h3>
-                <p>Year: {section.year}</p>
+                <p>Year: {section.years}</p>
                 <p>Term: {section.term}</p>
                 <p>CRN: {section.crn}</p>
                 <p>
-                  Course: {section.subject} {section.number}
+                  Course: {section.subjects} {section.numbers}
                 </p>
                 <p>Title: {section.title}</p>
                 <p>Instructor: {section.instructor}</p>
@@ -117,6 +144,7 @@ function Review() {
                   rows={5}
                   cols={30}
                   placeholder="Write your review here."
+                  aria-label="Write your review here."
                   className="review-textarea"
                 />
                 <div className="review-submit-button">
@@ -136,19 +164,19 @@ function Review() {
                 </thead>
                 <tbody>
                   {reviews.map((rev, index) => (
-                    <tr key={index}>
-                      <td className="review-column">{rev}</td>
+                    <tr key={rev.id}>
+                      <td className="review-column">{rev.review}</td>
                       <td className="edit-column">
                         <Button
                           label="Edit"
-                          onClick={() => handleReviewEdit(index)}
+                          onClick={() => handleReviewEdit(rev.id, index)}
                           className="p-button-secondary p-button-sm"
                         />
                       </td>
                       <td className="delete-column">
                         <Button
                           label="Delete"
-                          onClick={() => handleReviewDelete(index)}
+                          onClick={() => handleReviewDelete(rev.id)}
                           className="p-button-danger p-button-sm"
                         />
                       </td>
