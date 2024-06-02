@@ -14,21 +14,21 @@
 
 .review-search {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
-}
-
-.review-search form {
-  display: flex;
-  gap: 2px;
   width: 100%;
-  justify-content: center;
-  padding: 18px;
+  padding: 10px;
   background-color: #f9f9f9;
   border: 2px solid rgba(204, 204, 204, 0.5);
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+  margin-bottom: 12px;
+}
+
+.review-search form {
+  display: flex;
+  margin-right: 2px;
+  border-radius: 9px;
 }
 
 .review-search input {
@@ -45,7 +45,7 @@
   background-color: #e3f2fd;
   border-radius: 10px;
   padding: 15px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   border: 2px solid rgba(204, 204, 204, 0.5);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
 }
@@ -59,9 +59,13 @@
   background-color: #fff3e0;
   border-radius: 10px;
   padding: 15px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   border: 2px solid rgba(204, 204, 204, 0.5);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+.review-input button {
+  margin-right: 1px;
 }
 
 .review-input h3 {
@@ -92,12 +96,14 @@
 .reviews-list table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
 }
 
 .reviews-list th,
 .reviews-list td {
   padding: 10px;
   text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
 .reviews-list th {
@@ -111,6 +117,17 @@
 
 .reviews-list tr:nth-child(even) {
   background-color: #dcedc8;
+}
+
+.reviews-list .review-column {
+  width: 70%;
+  word-wrap: break-word;
+}
+
+.reviews-list .edit-column,
+.reviews-list .delete-column {
+  width: 10%;
+  text-align: center;
 }
 
 .p-button {

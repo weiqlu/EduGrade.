@@ -48,7 +48,6 @@ function ClassList() {
       <div className="classlist-container">
         <div className="classlist-header">
           <h2>Grade Distribution</h2>
-          <div></div>
           <div className="classlist-keyword">
             <FloatLabel>
               <InputText

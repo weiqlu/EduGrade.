@@ -58,7 +58,7 @@ function Review() {
     }
   };
 
-  // Scale the review container to the window size
+  // scale the page to the window size
   React.useEffect(() => {
     const handleResize = () => {
       const container = document.querySelector(".review-page");
@@ -75,6 +75,7 @@ function Review() {
     <div className="review-page">
       <div className="review-container">
         <div className="review-search">
+          <h2>Section Review </h2>
           <form onSubmit={handleSubmit}>
             <FloatLabel>
               <InputText
@@ -128,23 +129,23 @@ function Review() {
               <table>
                 <thead>
                   <tr>
-                    <th>Review</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
+                    <th className="review-column">Review</th>
+                    <th className="edit-column">Edit</th>
+                    <th className="delete-column">Delete</th>
                   </tr>
                 </thead>
                 <tbody>
                   {reviews.map((rev, index) => (
                     <tr key={index}>
-                      <td>{rev}</td>
-                      <td>
+                      <td className="review-column">{rev}</td>
+                      <td className="edit-column">
                         <Button
                           label="Edit"
                           onClick={() => handleReviewEdit(index)}
                           className="p-button-secondary p-button-sm"
                         />
                       </td>
-                      <td>
+                      <td className="delete-column">
                         <Button
                           label="Delete"
                           onClick={() => handleReviewDelete(index)}
