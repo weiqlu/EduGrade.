@@ -3,12 +3,11 @@ const mysql = require("mysql2");
 const cors = require("cors");
 
 const app = express();
-/* { origin: ["http://localhost:5000", "https://EduGrade.onrender.com"] } */
 app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: "localhost",
+  host: "",
   user: "weiqlu",
   password: "1200Fairwater",
   database: "edugrade",
@@ -89,4 +88,5 @@ app.put("/reviews/:id", (req, res) => {
   });
 });
 
-app.listen(5000, () => console.log("Server running on port 5000"));
+const PORT = 5000;
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
