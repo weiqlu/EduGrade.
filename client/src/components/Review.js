@@ -122,11 +122,11 @@ function Review() {
             <div className="section-details-wrapper">
               <div className="section-details">
                 <h3>Section Details</h3>
-                <p>Year: {section.years}</p>
+                <p>Year: {section.year}</p>
                 <p>Term: {section.term}</p>
                 <p>CRN: {section.crn}</p>
                 <p>
-                  Course: {section.subjects} {section.numbers}
+                  Course: {section.subject} {section.number}
                 </p>
                 <p>Title: {section.title}</p>
                 <p>Instructor: {section.instructor}</p>
