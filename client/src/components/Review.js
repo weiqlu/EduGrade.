@@ -1,6 +1,5 @@
 import React from "react";
 import "../styles/Review.css";
-import { SectionData } from "../data/Sections.js";
 import { InputText } from "primereact/inputtext";
 import { FloatLabel } from "primereact/floatlabel";
 import { InputText } from "primereact/inputtext";

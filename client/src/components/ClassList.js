@@ -2,7 +2,6 @@ import React from "react";
 import "../styles/ClassList.css";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { SectionData } from "../data/Sections.js";
 import { FilterMatchMode } from "primereact/api";
 import { InputText } from "primereact/inputtext";
 import { FloatLabel } from "primereact/floatlabel";
