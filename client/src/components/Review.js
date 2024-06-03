@@ -15,7 +15,7 @@ function Review() {
 
   React.useEffect(() => {
     if (crn) {
-      fetch(`http://localhost:3306/reviews/${crn}`)
+      fetch(`http://localhost:5000/reviews/${crn}`)
         .then((response) => response.json())
         .then((data) => {
           setReviews(data);
@@ -28,7 +28,7 @@ function Review() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    fetch("http://localhost:3306/sections")
+    fetch("http://localhost:5000/sections")
       .then((response) => response.json())
       .then((data) => {
         const foundSection = data.find((sec) => sec.crn === parseInt(crn));
@@ -44,7 +44,7 @@ function Review() {
     event.preventDefault();
     if (section) {
       const newReview = { crn: section.crn, review };
-      fetch("http://localhost:3306/reviews", {
+      fetch("http://localhost:5000/reviews", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,7 +63,7 @@ function Review() {
   };
 
   const handleReviewDelete = (id) => {
-    fetch(`http://localhost:3306/reviews/${id}`, {
+    fetch(`http://localhost:5000/reviews/${id}`, {
       method: "DELETE",
     })
       .then(() => {
@@ -78,7 +78,7 @@ function Review() {
   const handleReviewEdit = (id, index) => {
     const newReview = prompt("Edit your review:", reviews[index].review);
     if (newReview !== null) {
-      fetch(`http://localhost:3306/reviews/${id}`, {
+      fetch(`http://localhost:5000/reviews/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
