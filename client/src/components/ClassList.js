@@ -21,10 +21,10 @@ function ClassList() {
       .then((data) => {
         const formattedData = data.map((item) => ({
           ...item,
-          subjectNumber: `${item.subjects} ${item.numbers} ${item.instructor}`,
-          subjectNumberWithInstructor: `${item.subjects}${item.numbers}${item.instructor}`,
-          yearAndTerm: `${item.years}${item.term}`,
-          yearAndTerm2: `${item.years} ${item.term}`,
+          subjectNumber: `${item.subject} + ${item.number}`,
+          subjectNumberWithInstructor: `${item.subject}${item.number}${item.instructor}`,
+          yearAndTerm: `${item.year}${item.term}`,
+          yearAndTerm2: `${item.year} ${item.term}`,
         }));
         setClasses(formattedData);
       })
@@ -91,6 +91,9 @@ function ClassList() {
             "enrollments",
             "crn",
             "credits",
+            "year",
+            "term",
+            "number",
           ]}
           scrollable
           scrollHeight="flex"
