@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: "localhost",
+  host: "mysql",
   user: "weiqlu",
   password: "1200Fairwater",
   database: "edugrade",
@@ -88,5 +88,5 @@ app.put("/reviews/:id", (req, res) => {
   });
 });
 
-const port = 5000;
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const PORT = 5000;
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
