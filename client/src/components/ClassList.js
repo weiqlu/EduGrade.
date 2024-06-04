@@ -20,10 +20,10 @@ function ClassList() {
       .then((data) => {
         const formattedData = data.map((item) => ({
           ...item,
-          subjectNumber: `${item.subject} ${item.number} ${item.instructor}`,
-          subjectNumberWithInstructor: `${item.subject}${item.number}${item.instructor}`,
-          yearAndTerm: `${item.year}${item.term}`,
-          yearAndTerm2: `${item.year} ${item.term}`,
+          subjectNumber: `${item.subjects} ${item.numbers} ${item.instructor}`,
+          subjectNumberWithInstructor: `${item.subjects}${item.numbers}${item.instructor}`,
+          yearAndTerm: `${item.years}${item.term}`,
+          yearAndTerm2: `${item.years} ${item.term}`,
         }));
         setClasses(formattedData);
       })
@@ -95,10 +95,10 @@ function ClassList() {
           scrollHeight="flex"
           tableStyle={{ minWidth: "62rem" }}
         >
-          <Column field="year" header="Year" sortable></Column>
+          <Column field="years" header="Year" sortable></Column>
           <Column field="term" header="Term" sortable></Column>
-          <Column field="subject" header="Subject" sortable></Column>
-          <Column field="number" header="Course No." sortable></Column>
+          <Column field="subjects" header="Subject" sortable></Column>
+          <Column field="numbers" header="Course No." sortable></Column>
           <Column field="title" header="Course Title" sortable></Column>
           <Column field="instructor" header="Instructor" sortable></Column>
           <Column field="gpa" header="GPA" sortable></Column>
