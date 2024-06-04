@@ -15,7 +15,7 @@ function ClassList() {
   });
 
   React.useEffect(() => {
-    fetch("http://localhost:5000/sections")
+    fetch("https://edugrade-backend.onrender.com/sections")
       .then((response) => response.json())
       .then((data) => {
         const formattedData = data.map((item) => ({

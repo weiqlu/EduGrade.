@@ -7,12 +7,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const allowedOrigins = ['https://edugrade.onrender.com/']; 
-app.use(cors({
-  origin: allowedOrigins,
-  credentials: true, 
-}));
-
+const allowedOrigins = ["https://edugrade.onrender.com"];
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 
 const db = mysql.createConnection({
   host: process.env.MYSQL_HOST,
