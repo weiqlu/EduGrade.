@@ -9,12 +9,14 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 
 function ClassList() {
+  const [isLoading, setIsLoading] = React.useState(false);
   const [classes, setClasses] = React.useState([]);
   const [filter, setFilter] = React.useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
   });
 
   React.useEffect(() => {
+    setIsLoading(true);
     fetch("http://localhost:5000/sections")
       .then((response) => response.json())
       .then((data) => {
@@ -26,6 +28,7 @@ function ClassList() {
           yearAndTerm2: `${item.years} ${item.term}`,
         }));
         setClasses(formattedData);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -71,7 +74,6 @@ function ClassList() {
             </FloatLabel>
           </div>
         </div>
-
         <DataTable
           value={classes}
           dataKey="id"
@@ -94,6 +96,7 @@ function ClassList() {
           scrollable
           scrollHeight="flex"
           tableStyle={{ minWidth: "62rem" }}
+          emptyMessage={isLoading ? "Loading..." : "No data available"}
         >
           <Column field="years" header="Year" sortable></Column>
           <Column field="term" header="Term" sortable></Column>
