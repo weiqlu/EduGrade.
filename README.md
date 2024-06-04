@@ -4,6 +4,12 @@ EduGrade is a web application designed to make picking classes easier by providi
 
 Check out the live deployment of [EduGrade](https://edugrade.onrender.com/)!
 
+![alt text](https://github.com/weiqlu/EduGrade/tree/main/client/src/images/EduGrade_Home.png "Logo Title Text 1")
+
+![alt text](https://github.com/weiqlu/EduGrade/tree/main/client/src/images/EduGrade_GradeDistribution.png "Logo Title Text 1")
+
+![alt text](https://github.com/weiqlu/EduGrade/tree/main/client/src/images/EduGrade_Review "Logo Title Text 1")
+
 ## Table of Contents
 
 - [About The Project](#about-the-project)
