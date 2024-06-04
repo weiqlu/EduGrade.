@@ -12,7 +12,7 @@ Check out the live deployment of [EduGrade]()!
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Running the Application](#running-the-application)
-- [Usage]()
+- [Usage](#usage)
 - [Formatting](#formatting)
 
 ## About The Project
@@ -77,8 +77,8 @@ You need to have the following installed:
    npm start
    ```
 
+## Usage
 
-## Usage 
 Showcasing the functionalities of EduGrade:
 
 - Home Page: A welcoming page explaining the purpose of the application and providing a quick link to find your section.
