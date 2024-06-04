@@ -1,15 +1,10 @@
 .review-page {
-  margin-top: auto;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
   max-width: 1250px;
   padding: 10px;
   margin-top: 88px;
+  height: calc(100vh - 88px);
   overflow-y: auto;
-}
-
-.review-container {
-  /**/
 }
 
 .review-search {
