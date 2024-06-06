@@ -7,6 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+//testing
 const allowedOrigins = ["https://edugrade.onrender.com"];
 app.use(
   cors({
